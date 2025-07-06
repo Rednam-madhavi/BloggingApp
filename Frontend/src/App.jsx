@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { DarkModeProvider } from './context/DarkModeContext';
+
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';
 import PostPage from './pages/PostPage';
@@ -13,16 +15,18 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/posts/:id" element={<PostPage />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-            <Route path="/admin/create-post" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
-            <Route path="/admin/edit-post/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
-          </Routes>
-        </Layout>
+        <DarkModeProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/posts/:id" element={<PostPage />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/admin/create-post" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
+              <Route path="/admin/edit-post/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />
+            </Routes>
+          </Layout>
+        </DarkModeProvider>
       </AuthProvider>
     </Router>
   );
