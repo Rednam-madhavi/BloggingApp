@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import PostContent from '../components/Post/PostContent';
-import CommentList from '../components/Comment/CommentList';
-import CommentForm from '../components/Comment/CommentForm';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { fetchPostById } from '../services/posts';
-import { fetchCommentsByPostId } from '../services/comments';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
+import PostContent from "../components/Post/PostContent";
+import CommentForm from "../components/Comment/CommentForm";
+import CommentList from "../components/Comment/CommentList";
 
 const PostPage = () => {
     const { id } = useParams();
@@ -15,21 +14,19 @@ const PostPage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const getPostData = async () => {
+        const fetchData = async () => {
             try {
-                const [postData, commentsData] = await Promise.all([
-                    fetchPostById(id),
-                    fetchCommentsByPostId(id),
-                ]);
-                setPost(postData);
-                setComments(commentsData);
+                const mockPost = { /* ... */ };
+                const mockComments = [/* ... */];
+                setPost(mockPost);
+                setComments(mockComments);
             } catch (err) {
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
-        getPostData();
+        fetchData();
     }, [id]);
 
     const handleCommentSubmit = (newComment) => {

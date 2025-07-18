@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import PostList from '../components/Post/PostList';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { fetchPosts } from '../services/posts';
+import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
+import PostList from "../components/Post/PostList";
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
@@ -9,17 +9,17 @@ const HomePage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const getPosts = async () => {
+        const fetchPosts = async () => {
             try {
-                const data = await fetchPosts();
-                setPosts(data);
+                const mockPosts = [/* ... */];
+                setPosts(mockPosts);
             } catch (err) {
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
-        getPosts();
+        fetchPosts();
     }, []);
 
     if (loading) return <LoadingSpinner />;
@@ -27,7 +27,9 @@ const HomePage = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">Latest Blog Posts</h1>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+                Latest Blog Posts
+            </h1>
             <PostList posts={posts} />
         </div>
     );

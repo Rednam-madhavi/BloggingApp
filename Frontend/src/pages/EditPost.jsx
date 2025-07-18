@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { fetchPostById, updatePost } from '../services/posts';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 const EditPost = () => {
     const { id } = useParams();

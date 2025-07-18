@@ -1,15 +1,7 @@
-import api from './services/api';
+import axios from "axios";
 
-const source = api.getCancelToken();
+const api = axios.create({
+    baseURL: "http://localhost:5000/api",
+});
 
-api.get('/posts', { cancelToken: source.token })
-    .then(response => console.log(response))
-    .catch(error => {
-        if (axios.isCancel(error)) {
-            console.log('Request canceled:', error.message);
-        } else {
-            console.error('Request failed:', error);
-        }
-    });
-
-source.cancel('Operation canceled by the user');
+export default api;

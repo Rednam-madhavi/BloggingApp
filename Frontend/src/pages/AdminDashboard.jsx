@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import PostList from '../components/Post/PostList';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { fetchPosts } from '../services/posts';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
+import PostList from "../components/Post/PostList";
 
 const AdminDashboard = () => {
     const [posts, setPosts] = useState([]);

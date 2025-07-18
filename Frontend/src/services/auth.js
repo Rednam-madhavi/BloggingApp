@@ -1,16 +1,15 @@
-import api from './api';
-
-export const login = async (credentials) => {
-    const response = await api.post('/auth/login', credentials);
-    localStorage.setItem('token', response.data.token);
-    return response.data.user;
+export const login = async ({ username, password }) => {
+    const user = { username };
+    localStorage.setItem('token', 'sample_token');
+    return user;
 };
 
-export const logout = () => {
+export const logout = async () => {
     localStorage.removeItem('token');
 };
 
 export const getCurrentUser = async () => {
-    const response = await api.get('/auth/me');
-    return response.data;
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No token');
+    return { username: 'admin' };
 };

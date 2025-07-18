@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login as authLogin, logout as authLogout, getCurrentUser } from '../services/auth';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -20,28 +20,34 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     checkAuth();
   }, []);
 
   const login = async (credentials) => {
+    setLoading(true);
     try {
       const userData = await authLogin(credentials);
       setUser(userData);
       navigate('/admin/dashboard');
-    } catch (error) {
-      throw error;
+      return userData;
+    } finally {
+      setLoading(false);
     }
   };
 
   const logout = async () => {
-    await authLogout();
-    setUser(null);
-    navigate('/admin/login');
+    setLoading(true);
+    try {
+      await authLogout();
+      setUser(null);
+      navigate('/admin/login');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useAuth } from "../hooks/useAuth";
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('');
