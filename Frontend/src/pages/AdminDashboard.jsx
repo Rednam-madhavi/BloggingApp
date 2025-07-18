@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import ErrorMessage from "../components/UI/ErrorMessage";
 import PostList from "../components/Post/PostList";
 import { fetchPosts, deletePost } from "../services/posts";
 

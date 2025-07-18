@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import ErrorMessage from "../components/UI/ErrorMessage";
 import PostList from "../components/Post/PostList";
 import { fetchPosts } from "../services/posts";
 

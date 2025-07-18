@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 import { useAuth } from "../hooks/useAuth";
 
 const AdminLogin = () => {

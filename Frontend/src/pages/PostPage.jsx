@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import ErrorMessage from "../components/UI/ErrorMessage";
 import PostContent from "../components/Post/PostContent";
 import CommentForm from "../components/Comment/CommentForm";
 import CommentList from "../components/Comment/CommentList";
