@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import PostList from "../components/Post/PostList";
+import { fetchPosts, deletePost } from "../services/posts";
 
 const AdminDashboard = () => {
     const [posts, setPosts] = useState([]);
@@ -25,7 +26,6 @@ const AdminDashboard = () => {
 
     const handleDelete = async (postId) => {
         try {
-            // Call API to delete post
             await deletePost(postId);
             setPosts(posts.filter(post => post._id !== postId));
         } catch (err) {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import PostList from "../components/Post/PostList";
+import { fetchPosts } from "../services/posts";
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
@@ -9,17 +10,17 @@ const HomePage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const getPosts = async () => {
             try {
-                const mockPosts = [/* ... */];
-                setPosts(mockPosts);
+                const data = await fetchPosts();
+                setPosts(data);
             } catch (err) {
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
-        fetchPosts();
+        getPosts();
     }, []);
 
     if (loading) return <LoadingSpinner />;

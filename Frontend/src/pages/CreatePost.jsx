@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
+import { createPost } from "../services/posts";
 
 const CreatePost = () => {
     const [title, setTitle] = useState('');

@@ -2,7 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login as authLogin, logout as authLogout, getCurrentUser } from '../services/auth';
 
-const AuthContext = createContext();
+// ✅ Provide both exports
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

@@ -10,6 +10,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import ProtectedRoute from './components/UI/ProtectedRoute';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/posts/:id" element={<PostPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/signup" element={<SignUp />} />
               <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
               <Route path="/admin/create-post" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
               <Route path="/admin/edit-post/:id" element={<ProtectedRoute><EditPost /></ProtectedRoute>} />

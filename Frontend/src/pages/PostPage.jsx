@@ -5,6 +5,8 @@ import ErrorMessage from "../components/ErrorMessage";
 import PostContent from "../components/Post/PostContent";
 import CommentForm from "../components/Comment/CommentForm";
 import CommentList from "../components/Comment/CommentList";
+import { fetchPostById } from "../services/posts";
+import { fetchCommentsByPostId } from "../services/comments";
 
 const PostPage = () => {
     const { id } = useParams();
@@ -16,10 +18,10 @@ const PostPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const mockPost = { /* ... */ };
-                const mockComments = [/* ... */];
-                setPost(mockPost);
-                setComments(mockComments);
+                const post = await fetchPostById(id);
+                const commentsData = await fetchCommentsByPostId(id);
+                setPost(post);
+                setComments(commentsData);
             } catch (err) {
                 setError(err.message);
             } finally {
