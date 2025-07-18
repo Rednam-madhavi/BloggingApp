@@ -1,68 +1,41 @@
-import { User } from '../models/user.models.js';
-import { generateToken } from '../utils/jwt.js';
+import User from '../models/user.models.js';
+import jwt from 'jsonwebtoken';
 
-// @desc    Register a new user (admin)
-// @route   POST /api/auth/register
-const register = async (req, res, next) => {
+const generateToken = (userId) => {
+    return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+        expiresIn: '7d',
+    });
+};
+
+const signup = async (req, res, next) => {
     try {
-        const { username, password } = req.body;
+        const { username, email, password } = req.body;
+        const userExists = await User.findOne({ email });
+        if (userExists) return res.status(400).json({ message: 'User already exists' });
 
-        // Check if user exists
-        const userExists = await User.findOne({ username });
-        if (userExists) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
+        const user = await User.create({ username, email, password });
+        const token = generateToken(user._id);
 
-        // Create admin user
-        const user = await User.create({
-            username,
-            password,
-            role: 'admin',
-        });
-
-        res.status(201).json({
-            _id: user._id,
-            username: user.username,
-            role: user.role,
-            token: generateToken(user._id),
-        });
+        res.status(201).json({ user: { id: user._id, username, email }, token });
     } catch (err) {
         next(err);
     }
 };
 
-// @desc    Authenticate user & get token
-// @route   POST /api/auth/login
 const login = async (req, res, next) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: 'User not found' });
 
-        const user = await User.findOne({ username }).select('+password');
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
 
-        if (!user || !(await user.comparePassword(password))) {
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        res.json({
-            _id: user._id,
-            username: user.username,
-            role: user.role,
-            token: generateToken(user._id),
-        });
+        const token = generateToken(user._id);
+        res.json({ user: { id: user._id, username: user.username, email }, token });
     } catch (err) {
         next(err);
     }
 };
 
-// @desc    Get current user profile
-// @route   GET /api/auth/me
-const getMe = async (req, res, next) => {
-    try {
-        const user = await User.findById(req.user.id);
-        res.json(user);
-    } catch (err) {
-        next(err);
-    }
-};
-
-export { register, login, getMe };
+export { signup, login };
