@@ -2,7 +2,6 @@
 
 A feature-rich blog platform built using the MERN (MongoDB, Express, React, Node.js) stack with admin dashboard, authentication, dark mode, and post management.
 
-
 ## Features
 
 - **Authentication**: Secure login/logout for admins
@@ -14,21 +13,18 @@ A feature-rich blog platform built using the MERN (MongoDB, Express, React, Node
 - **User Roles**: Admin and public-facing interfaces
 - **Environment Configurable**: API endpoints via `.env`
 
-
 ## Tech Stack
 
-**Frontend**:  
-- React + Vite  
-- Tailwind CSS  
-- React Router  
-- Heroicons  
+**Frontend**:
 
-**Backend**:  
-- Node.js  
-- Express.js  
-- MongoDB  
+- React + Vite
+- Tailwind CSS
+- React Router
+- Heroicons
+
+**Backend**:
+
+- Node.js
+- Express.js
+- MongoDB
 - JWT Authentication (for admin login)
-
----
-
-
